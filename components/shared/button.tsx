@@ -1,7 +1,7 @@
 import { TextClassContext } from '@/components/shared/text';
-import { cn } from '@/components/lib/utils';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { Platform, Pressable } from 'react-native';
+import { cn } from '../../lib/utils';
 
 const buttonVariants = cva(
   cn(
@@ -104,3 +104,4 @@ function Button({ className, variant, size, ...props }: ButtonProps) {
 
 export { Button, buttonTextVariants, buttonVariants };
 export type { ButtonProps };
+

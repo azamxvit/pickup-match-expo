@@ -1,29 +1,19 @@
-import { Link } from 'expo-router';
-import { StyleSheet } from 'react-native';
-
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
+import { Text } from '@/components/shared/text';
+import { StatusBar } from 'expo-status-bar';
+import { Platform, View } from 'react-native';
 
 export default function ModalScreen() {
   return (
-    <ThemedView style={styles.container}>
-      <ThemedText type="title">This is a modal</ThemedText>
-      <Link href="/" dismissTo style={styles.link}>
-        <ThemedText type="link">Go to home screen</ThemedText>
-      </Link>
-    </ThemedView>
+    <View className="flex-1 items-center justify-center bg-background p-4">
+      <Text className="text-h1 font-bold text-text mb-4">Настройки</Text>
+      
+      <View className="h-[1px] w-full bg-border my-4" />
+      
+      <Text className="text-body text-text-muted text-center">
+        Здесь будут фильтры поиска или настройки профиля.
+      </Text>
+
+      <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
+    </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20,
-  },
-  link: {
-    marginTop: 15,
-    paddingVertical: 15,
-  },
-});
