@@ -1,41 +1,31 @@
+import { Screen } from '@/components/shared/screen';
 import { Text } from '@/components/shared/text';
-import { Activity } from 'lucide-react-native';
-import { useTranslation } from 'react-i18next';
-import { ScrollView, TouchableOpacity, View } from 'react-native';
-
 import { ProfileHeader } from '@/components/sections/profile/ProfileHeader';
 import { ProfileStats } from '@/components/sections/profile/ProfileStats';
 import { ProfileTabs } from '@/components/sections/profile/ProfileTabs';
+import { palette } from '@/constants/theme';
+import { currentPlayer } from '@/lib/mock-data';
+import { LineChart } from 'lucide-react-native';
+import { Pressable, View } from 'react-native';
 
 export default function ProfileScreen() {
-  const { t } = useTranslation();
-
   return (
-    <ScrollView 
-      className="flex-1 bg-background" 
-      showsVerticalScrollIndicator={false}
-      contentContainerStyle={{ paddingBottom: 40 }}
-    >
-      <View className="flex-1 pb-6">
-        
-        <ProfileHeader />
+    <Screen scrollable scrollViewProps={{ contentContainerStyle: { paddingBottom: 48 } }}>
+      <ProfileHeader player={currentPlayer} />
 
-        <ProfileTabs />
+      <ProfileTabs />
 
-        <ProfileStats />
+      <ProfileStats player={currentPlayer} />
 
-        <View className="px-4 mt-6">
-          <TouchableOpacity 
-            className="w-full bg-surface border border-border rounded-2xl flex-row justify-center items-center py-4 gap-2 active:opacity-70"
-          >
-            <Activity size={20} className="text-text" />
-            <Text className="text-button text-text font-bold">
-              {t('analyze', 'Анализ')}
-            </Text>
-          </TouchableOpacity>
-        </View>
-
+      <View className="px-4 mt-6">
+        <Pressable
+          accessibilityRole="button"
+          className="flex-row items-center justify-center gap-2 bg-card border border-border rounded-2xl py-4 active:opacity-70"
+        >
+          <LineChart size={18} color={palette.text} />
+          <Text className="text-button text-text">Анализ</Text>
+        </Pressable>
       </View>
-    </ScrollView>
+    </Screen>
   );
 }

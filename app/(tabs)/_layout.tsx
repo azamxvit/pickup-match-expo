@@ -1,33 +1,59 @@
+import { palette } from '@/constants/theme';
 import { Tabs } from 'expo-router';
-import { Map, User } from 'lucide-react-native';
-import { useColorScheme } from 'react-native';
+import { BarChart3, Map as MapIcon, User, Volleyball } from 'lucide-react-native';
+import { Platform } from 'react-native';
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: '#B49372',
+        tabBarActiveTintColor: palette.primary,
+        tabBarInactiveTintColor: palette.textMuted,
         headerShown: false,
+        tabBarShowLabel: false,
         tabBarStyle: {
-          backgroundColor: colorScheme === 'dark' ? '#121212' : '#FFFFFF',
+          backgroundColor: palette.background,
+          borderTopColor: palette.border,
+          borderTopWidth: Platform.OS === 'ios' ? 0.5 : 1,
+          height: Platform.OS === 'ios' ? 84 : 64,
+          paddingTop: 8,
         },
-      }}>
-      
+      }}
+    >
       <Tabs.Screen
         name="index"
         options={{
           title: 'Игры',
-          tabBarIcon: ({ color }) => <Map size={24} color={color} />,
+          tabBarIcon: ({ color }) => (
+            <Volleyball size={26} color={color} strokeWidth={1.6} />
+          ),
         }}
       />
-
+      <Tabs.Screen
+        name="map"
+        options={{
+          title: 'Карта',
+          tabBarIcon: ({ color }) => (
+            <MapIcon size={26} color={color} strokeWidth={1.6} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="leaderboard"
+        options={{
+          title: 'Лидерборд',
+          tabBarIcon: ({ color }) => (
+            <BarChart3 size={26} color={color} strokeWidth={1.6} />
+          ),
+        }}
+      />
       <Tabs.Screen
         name="profile"
         options={{
           title: 'Профиль',
-          tabBarIcon: ({ color }) => <User size={24} color={color} />,
+          tabBarIcon: ({ color }) => (
+            <User size={26} color={color} strokeWidth={1.6} />
+          ),
         }}
       />
     </Tabs>
